@@ -1,7 +1,7 @@
 # electron-react
 Electron+React+七牛云 实战跨平台桌面应用 使用 Github 的 Electron，开发一款自动云同步的 Markdown 文件管理软件
 
-## 进程与线程
+## 1、进程与线程
 
 ### 概念
 线程是操作系统能够进行运算调度的最小单位。它被包含在进程之中，是进程中实际运作单位。
@@ -19,8 +19,17 @@ Electron+React+七牛云 实战跨平台桌面应用 使用 Github 的 Electron�
 #### 量级方面的区别
 - 线程相对于进程创建起来更轻、更快，使用的资源更少。
 
-### nodemon 使用
+## 2、nodemon 使用
 `"start": "nodemon --watch main.js --exec \"electron .\""`
 - --watch 监听哪个文件
 - --exec 执行哪个文件
 - 用 \ 转义""
+
+## 3、concurrently 和 wait-on
+
+- concurrently 可以同时执行多个命令
+- wait-on 可以等某个操作完成后继续下一个命令
+
+```js
+"dev": "concurrently \"wait-on http://localhost:3000 && electron .\" \"cross-env BROWSER=none npm start\"",
+```
