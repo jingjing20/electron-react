@@ -6,13 +6,13 @@ function App() {
   return (
     <div className="App container-fluid">
       <div className="row">
-        <div className="col-3 bg-light left-panel">
+        <div className="col-5 bg-light left-panel">
           <FileSearch
             title='我的云文档'
-            onFileSearch={() => { }}
+            onFileSearch={(value) => { console.log(value) }}
           />
         </div>
-        <div className="col-9 bg-primary right-panel">
+        <div className="col-7 bg-primary right-panel">
           <h1>this is the right</h1>
         </div>
       </div>
