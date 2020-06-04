@@ -1,0 +1,10 @@
+.icon-button{
+  background: none;
+  border: none;
+  color: inherit;
+  margin-left: 5px;
+}
+
+.c-link{
+  cursor: pointer;
+}

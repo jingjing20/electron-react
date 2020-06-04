@@ -1,31 +1,43 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
+import useKeyPress from '../hooks/useKeyPress';
+
 // 获取父组件传过来的东西
 const FileSearch = ({ title, onFileSearch }) => {
 
   const [inputActive, setInputActive] = useState(false);
   const [value, setValue] = useState('');
   const node = useRef(null);
-  const closeSearch = (e) => {
-    e.preventDefault()
+  const enterPressed = useKeyPress(13)
+  const escPressed = useKeyPress(27)
+  const closeSearch = () => {
     setInputActive(false)
     setValue('')
   }
 
   useEffect(() => {
-    const handleInputEvent = (event) => {
-      const { keyCode } = event
-      if (keyCode === 13 && inputActive) {
-        onFileSearch(value)
-      } else if (keyCode === 27 && inputActive) {
-        closeSearch(event)
-      }
+    if (enterPressed && inputActive) {
+      onFileSearch(value)
+      setInputActive(false)
+      setValue('')
     }
-    document.addEventListener('keyup', handleInputEvent)
-    return () => {
-      document.removeEventListener('keyup', handleInputEvent)
+    if (escPressed && inputActive) {
+      closeSearch()
     }
+    // const handleInputEvent = (event) => {
+    //   const { keyCode } = event
+    //   if (keyCode === 13 && inputActive) {
+    //     onFileSearch(value)
+    //   } else if (keyCode === 27 && inputActive) {
+    //     closeSearch(event)
+    //   }
+    // }
+    // document.addEventListener('keyup', handleInputEvent)
+    // return () => {
+    //   document.removeEventListener('keyup', handleInputEvent)
+    // }
   })
 
   useEffect(() => {
@@ -41,10 +53,13 @@ const FileSearch = ({ title, onFileSearch }) => {
           <span>{title}</span>
           <button
             type="button"
-            className="btn btn-primary"
+            className="icon-button"
             onClick={() => { setInputActive(true) }}
           >
-            <FontAwesomeIcon icon={faSearch} />
+            <FontAwesomeIcon
+              icon={faSearch}
+              size="lg"
+            />
           </button>
         </>
       }
@@ -58,10 +73,13 @@ const FileSearch = ({ title, onFileSearch }) => {
           />
           <button
             type="button"
-            className="btn btn-primary"
+            className="icon-button"
             onClick={() => { setInputActive(false) }}
           >
-            <FontAwesomeIcon icon={faTimes} />
+            <FontAwesomeIcon
+              icon={faTimes}
+              size="lg"
+            />
           </button>
         </>
       }
@@ -69,4 +87,12 @@ const FileSearch = ({ title, onFileSearch }) => {
   )
 }
 
+FileSearch.propTypes = {
+  title: PropTypes.string,
+  onFileSearch: PropTypes.func.isRequired
+}
+
+FileSearch.defaultProps = {
+  title: '我的云文档'
+}
 export default FileSearch
