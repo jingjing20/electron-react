@@ -110,7 +110,7 @@
     "qiniu": "^7.2.2",
     "concurrently": "^4.1.1",
     "cross-env": "^5.2.0",
-    "electron": "^5.0.6",
+    "electron": "^9.1.0",
     "electron-builder": "^21.2.0",
     "wait-on": "^3.3.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
